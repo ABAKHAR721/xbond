@@ -1,26 +1,126 @@
 @import "tailwindcss";
+@config "../../tailwind.config.ts";
+@source "../**/*.{ts,tsx,js,jsx,mdx}";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Noto Sans, Cantarell, Helvetica Neue, Arial, sans-serif;
+  --color-brand: #f47400;
+  --color-brand-50: #fff3e8;
+  --color-brand-100: #ffe5d1;
+  --color-brand-200: #ffc6a3;
+  --color-brand-300: #ffa373;
+  --color-brand-400: #ff8a4f;
+  --color-brand-500: #f47400;
+  --color-brand-600: #ce5f00;
+  --color-brand-700: #a44a00;
+  --color-brand-800: #7a3600;
+  --color-brand-900: #532400;
+  --shadow-soft: 0 10px 30px -12px rgba(244, 116, 0, 0.25);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+html, body {
+  background-color: #0a0a0a;
+  color: #f5f5f5;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Ensure modal text renders crisply and on top */
+.modal-open {
+  overflow: hidden;
+}
+
+/* Normalize anchor styles to match our design system */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.container-px {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+  .container-px {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (min-width: 1024px) {
+  .container-px {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
+
+.card {
+  border-radius: 1rem;
+  border: 1px solid #262626;
+  background-color: rgba(23, 23, 23, 0.4);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  text-decoration: none;
+  color: inherit;
+  white-space: nowrap;
+}
+
+.btn:visited {
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: white;
+  color: #171717;
+}
+
+.btn-primary:visited {
+  color: #171717;
+}
+
+.btn-primary:hover {
+  background-color: #e5e5e5;
+}
+
+.btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-ghost:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.btn-ghost:visited {
+  color: inherit;
+}
+
+.btn-brand {
+  background-color: #f47400;
+  color: white;
+}
+
+.btn-brand:hover {
+  opacity: 0.9;
+}
+
+.btn-brand:visited {
+  color: white;
+}
+
