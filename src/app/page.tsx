@@ -9,24 +9,7 @@ import { Pricing } from '@/components/pricing'
 import { FAQ } from '@/components/faq'
 import { ServiceCards } from '@/components/service-cards'
 import { Reveal, RevealContainer } from '@/components/reveal'
-
-const pricingTiers = [
-  {
-    name: 'Basic',
-    price: '$99/mo',
-    bullets: ['AI chatbot', 'Basic workflows', 'Analytics dashboard', 'Email support']
-  },
-  {
-    name: 'Growth',
-    price: '$299/mo',
-    bullets: ['Advanced chatbots', 'Lead qualification & follow‑up', 'Automated reporting', 'Priority support']
-  },
-  {
-    name: 'Bespoke',
-    price: 'Custom',
-    bullets: ['Custom integrations', 'Decision models', 'Multi‑dept automation', 'Dedicated consultant']
-  }
-]
+import { useTheme } from '@/contexts/theme-context'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -35,32 +18,42 @@ const fadeInUp = {
 }
 
 export default function HomePage() {
+  const { theme } = useTheme()
+  
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-neutral-900">
+      <section className={`relative overflow-hidden border-b transition-colors ${
+        theme === 'dark' ? 'border-neutral-900' : 'border-neutral-200'
+      }`}>
         <div className="absolute inset-0 bg-[radial-gradient(60rem_30rem_at_50%_-20%,rgba(244,116,0,0.18),transparent_60%)]" />
-        <div className="container-px mx-auto max-w-7xl pt-20 pb-24">
-          <motion.h1 {...fadeInUp} className="text-4xl md:text-6xl font-semibold tracking-tight text-center">
+        <div className="container-px mx-auto max-w-7xl pt-16 pb-20 md:pt-20 md:pb-24">
+          <motion.h1 {...fadeInUp} className="text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight text-center px-4">
             AI‑Powered Outreach & Lead Systems
           </motion.h1>
-          <motion.p {...fadeInUp} transition={{...fadeInUp.transition, delay:0.1}} className="mt-5 text-lg md:text-xl text-neutral-300 max-w-3xl mx-auto text-center">
+          <motion.p {...fadeInUp} transition={{...fadeInUp.transition, delay:0.1}} className={`mt-4 md:mt-5 text-base sm:text-lg md:text-xl max-w-3xl mx-auto text-center px-4 ${
+            theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
+          }`}>
             We design and run cold outreach pipelines, lead nurturing automations, and custom acquisition workflows so qualified clients come to you.
           </motion.p>
-          <motion.div {...fadeInUp} transition={{...fadeInUp.transition, delay:0.2}} className="mt-8 flex flex-col sm:flex-row items-center gap-3 justify-center">
-            <Link href="/pricing" className="btn btn-primary">See pricing</Link>
-            <Link href="/contact" className="btn btn-ghost">Book a discovery call</Link>
+          <motion.div {...fadeInUp} transition={{...fadeInUp.transition, delay:0.2}} className="mt-6 md:mt-8 flex flex-col sm:flex-row items-center gap-3 justify-center relative z-10 px-4">
+            <Link href="/pricing" className="btn btn-primary w-full sm:w-auto">See pricing</Link>
+            <Link href="/contact" className="btn btn-ghost w-full sm:w-auto">Book a discovery call</Link>
           </motion.div>
         </div>
       </section>
 
       {/* Services */}
-      <section className="container-px mx-auto max-w-7xl py-20" id="services">
-        <RevealContainer className="grid md:grid-cols-2 gap-12 items-start">
+      <section className="container-px mx-auto max-w-7xl py-12 md:py-20" id="services">
+        <RevealContainer className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
           <Reveal>
-            <h2 className="text-2xl md:text-4xl font-semibold tracking-tight">Services that ship pipeline</h2>
-            <p className="mt-4 text-neutral-300 max-w-prose">Done‑for‑you strategy, build, and implementation tailored to your goals. Start small, scale what works.</p>
-            <ul className="mt-6 space-y-3 text-sm text-neutral-200">
+            <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold tracking-tight">Services that ship pipeline</h2>
+            <p className={`mt-4 max-w-prose ${
+              theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
+            }`}>Done‑for‑you strategy, build, and implementation tailored to your goals. Start small, scale what works.</p>
+            <ul className={`mt-6 space-y-3 text-sm ${
+              theme === 'dark' ? 'text-neutral-200' : 'text-neutral-700'
+            }`}>
               {[
                 'AI‑assisted cold outreach systems (multichannel email/LinkedIn)',
                 'Lead nurturing automations and CRM enrichment',
@@ -92,14 +85,20 @@ export default function HomePage() {
       </section>
 
       {/* Logos */}
-      <section className="border-t border-neutral-900">
+      <section className={`border-t transition-colors ${
+        theme === 'dark' ? 'border-neutral-900' : 'border-neutral-200'
+      }`}>
         <div className="container-px mx-auto max-w-7xl py-12">
-          <p className="text-center text-sm text-neutral-400">Trusted by teams who value speed & quality</p>
+          <p className={`text-center text-sm ${
+            theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'
+          }`}>Trusted by teams who value speed & quality</p>
           <RevealContainer className="mt-6 grid grid-cols-2 md:grid-cols-6 gap-6 opacity-80">
             {['Acme','Nimbus','Voyage','Octagon','Northstar','Marble'].map((l)=>(
               <Reveal key={l}>
                 <div className="flex items-center justify-center">
-                  <span className="text-neutral-400/80 text-sm">{l}</span>
+                  <span className={`text-sm ${
+                    theme === 'dark' ? 'text-neutral-400/80' : 'text-neutral-500/80'
+                  }`}>{l}</span>
                 </div>
               </Reveal>
             ))}
@@ -110,9 +109,9 @@ export default function HomePage() {
       <ProofBar />
 
       {/* Pricing section */}
-      <section className="container-px mx-auto max-w-7xl py-20" id="pricing">
+      <section className="container-px mx-auto max-w-7xl py-12 md:py-20" id="pricing">
         <div className="flex items-end justify-between flex-wrap gap-4">
-          <h2 className="text-2xl md:text-4xl font-semibold tracking-tight">Pricing</h2>
+          <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold tracking-tight">Pricing</h2>
         </div>
         <div className="mt-8">
           <Pricing />
@@ -124,16 +123,18 @@ export default function HomePage() {
       <section className="container-px mx-auto max-w-7xl pb-24">
         <CTABanner
           title="Ready to make pipeline predictable?"
-          subtitle="Book a 20‑minute discovery. We’ll map one high‑impact workflow and outline a pilot you can ship in days."
-          primary={{ href: '/contact', label: 'Book a call' }}
+          subtitle="Book a 15‑minute discovery. We’ll map one high‑impact workflow and outline a pilot you can ship in days."
+          primary={{ href: 'https://calendly.com/xbond', label: 'Book a call' }}
           secondary={{ href: '/services', label: 'See services' }}
         />
       </section>
 
       {/* Services cards (full section from Services page) */}
-      <section className="container-px mx-auto max-w-7xl py-20" id="services-cards">
-        <h2 className="text-2xl md:text-4xl font-semibold tracking-tight">Services</h2>
-        <p className="mt-4 text-neutral-300 max-w-prose">We help startups and service businesses get more clients through AI‑powered outreach and lead systems. Choose what you need, or bundle into a pilot.</p>
+      <section className="container-px mx-auto max-w-7xl py-12 md:py-20" id="services-cards">
+        <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold tracking-tight">Services</h2>
+        <p className={`mt-4 max-w-prose ${
+          theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
+        }`}>We help startups and service businesses get more clients through AI‑powered outreach and lead systems. Choose what you need, or bundle into a pilot.</p>
         <ServiceCards />
       </section>
 

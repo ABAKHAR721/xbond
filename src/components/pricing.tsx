@@ -2,6 +2,7 @@
 import { useState, useMemo } from 'react'
 import { PlanModal, type PlanName } from './plan-modal'
 import { Reveal, RevealContainer } from './reveal'
+import { useTheme } from '@/contexts/theme-context'
 
 const tiers = [
   {
@@ -34,48 +35,136 @@ function getTierDescription(tierName: string): string {
 export function Pricing(){
   const [billing, setBilling] = useState<'monthly'|'yearly'>('monthly')
   const [openPlan, setOpenPlan] = useState<PlanName|null>(null)
+  const { theme } = useTheme()
   
-  const price = useMemo(() => {
-    return (m: number) => billing === 'monthly' ? m : Math.round(m * 12 * 0.85) // 15% off yearly
+  const getPrice = useMemo(() => {
+    return (monthly: number) => {
+      if (billing === 'monthly') return monthly
+      return Math.round(monthly * 0.8) // 20% discount for yearly
+    }
   }, [billing])
+  
+  const getYearlyTotal = useMemo(() => {
+    return (monthly: number) => {
+      return getPrice(monthly) * 12
+    }
+  }, [getPrice])
 
   return (
     <div>
-      <div className="flex items-center gap-2 text-sm">
-        <span className={billing==='monthly'? 'font-medium':'text-neutral-400'}>Monthly</span>
-        <button onClick={()=> setBilling(billing==='monthly'?'yearly':'monthly')} className="relative inline-flex h-6 w-11 items-center rounded-full bg-neutral-800">
-          <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${billing==='monthly'?'translate-x-1':'translate-x-5'}`} />
-        </button>
-        <span className={billing==='yearly'? 'font-medium':'text-neutral-400'}>Yearly <span className="ml-1 rounded bg-emerald-600/20 text-emerald-300 px-1.5 py-0.5">-15%</span></span>
+      <div className="flex items-center justify-center gap-4 mb-8">
+        <div className="flex items-center gap-3 p-1 rounded-2xl border transition-colors" style={{
+          borderColor: theme === 'dark' ? '#262626' : '#e5e5e5',
+          backgroundColor: theme === 'dark' ? 'rgba(23, 23, 23, 0.4)' : 'rgba(255, 255, 255, 0.8)'
+        }}>
+          <button 
+            onClick={() => setBilling('monthly')}
+            className={`px-6 py-2 rounded-xl text-sm font-medium transition-all ${
+              billing === 'monthly' 
+                ? 'bg-brand text-white shadow-lg' 
+                : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
+            }`}
+          >
+            Monthly
+          </button>
+          <button 
+            onClick={() => setBilling('yearly')}
+            className={`px-6 py-2 rounded-xl text-sm font-medium transition-all relative ${
+              billing === 'yearly' 
+                ? 'bg-brand text-white shadow-lg' 
+                : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
+            }`}
+          >
+            Yearly
+            <span className="absolute -top-2 -right-2 bg-emerald-500 text-white text-xs px-2 py-0.5 rounded-full font-semibold">
+              -20%
+            </span>
+          </button>
+        </div>
       </div>
 
-      <RevealContainer className="mt-8 grid md:grid-cols-3 gap-6 items-stretch">
+      <RevealContainer className="grid md:grid-cols-3 gap-8 items-stretch">
         {tiers.map((t)=> (
           <Reveal key={t.name}>
-          <div className={`relative card p-6 h-full flex flex-col ${t.popular ? 'border-brand/60 bg-brand/5' : ''}`}>
+          <div className={`relative card p-8 h-full flex flex-col transition-all duration-300 hover:scale-105 ${
+            t.popular 
+              ? 'border-brand/60 shadow-soft' + (theme === 'dark' ? ' bg-brand/5' : ' bg-brand/10') 
+              : ''
+          }`}>
             {t.popular && (
-              <span className="absolute -top-3 left-6 rounded-full bg-brand text-neutral-900 text-xs font-semibold px-2 py-1">Popular</span>
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-gradient-to-r from-brand to-orange-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
+                  🔥 Most Popular
+                </span>
+              </div>
             )}
-            <h3 className="text-lg font-medium">{t.name}</h3>
-            <p className="text-sm text-neutral-300">{getTierDescription(t.name)}</p>
-            <div className="mt-4 text-3xl font-semibold">{t.name==='Bespoke'? 'Let\'s talk' : `$${price(t.monthly)}`}<span className="text-base font-normal text-neutral-400">{t.name==='Bespoke'?'':'/'+ (billing==='monthly'?'mo':'yr')}</span></div>
-            <ul className="mt-6 space-y-2 text-sm text-neutral-300">
-              {t.bullets.map((b)=> <li key={b}>• {b}</li>)}
+            <div className="text-center mb-6">
+              <h3 className="text-xl font-bold mb-2">{t.name}</h3>
+              <p className={`text-sm ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>
+                {getTierDescription(t.name)}
+              </p>
+            </div>
+            
+            <div className="text-center mb-8">
+              {t.name === 'Bespoke' ? (
+                <div className="text-4xl font-bold text-brand mb-2">Custom</div>
+              ) : (
+                <>
+                  <div className="flex items-baseline justify-center gap-1 mb-2">
+                    <span className="text-5xl font-bold">${getPrice(t.monthly)}</span>
+                    <span className={`text-lg ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>/mo</span>
+                  </div>
+                  {billing === 'yearly' && (
+                    <div className={`text-sm ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-600'}`}>
+                      <span className="line-through">${t.monthly}/mo</span>
+                      <span className="ml-2 text-emerald-500 font-semibold">Save ${(t.monthly - getPrice(t.monthly)) * 12}/year</span>
+                    </div>
+                  )}
+                  {billing === 'yearly' && (
+                    <div className={`text-xs mt-1 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-500'}`}>
+                      Billed annually: ${getYearlyTotal(t.monthly)}
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+            
+            <ul className={`space-y-3 text-sm mb-8 flex-1 ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'}`}>
+              {t.bullets.map((b)=> (
+                <li key={b} className="flex items-start gap-3">
+                  <span className="text-brand font-bold mt-0.5">✓</span>
+                  <span>{b}</span>
+                </li>
+              ))}
             </ul>
+            
             <div className="mt-auto">
               {t.name === 'Bespoke' ? (
-                <a href="/contact" className="btn mt-6 w-full btn-ghost">Contact sales</a>
+                <a href="/contact" className="btn w-full btn-ghost text-center block py-3">
+                  Contact Sales
+                </a>
               ) : (
-                <button onClick={()=> setOpenPlan(t.name as PlanName)} className={`btn mt-6 w-full ${t.popular? 'btn-primary text-neutral-900':'btn-ghost'}`}>Choose {t.name}</button>
+                <button 
+                  onClick={() => setOpenPlan(t.name as PlanName)} 
+                  className={`btn w-full py-3 text-center ${
+                    t.popular ? 'btn-primary' : 'btn-ghost'
+                  }`}
+                >
+                  Get Started
+                </button>
               )}
-              {t.name!=='Bespoke' && <p className="mt-2 text-xs text-neutral-400">+ one‑time setup from $290</p>}
+              {t.name !== 'Bespoke' && (
+                <p className={`mt-3 text-xs text-center ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-600'}`}>
+                  + One-time setup from $290
+                </p>
+              )}
             </div>
           </div>
           </Reveal>
         ))}
       </RevealContainer>
 
-      <PlanModal open={!!openPlan} plan={openPlan} onClose={()=> setOpenPlan(null)} />
+      <PlanModal open={!!openPlan} plan={openPlan} onClose={()=> setOpenPlan(null)} billing={billing} />
     </div>
   )
 }

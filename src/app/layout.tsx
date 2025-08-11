@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { Nav } from '@/components/nav'
+import { Nav, MobileBottomNav } from '@/components/nav'
 import { Footer } from '@/components/footer'
+import { ThemeProvider } from '@/contexts/theme-context'
 
 // app/layout.tsx
 import { Inter } from 'next/font/google'
@@ -33,11 +34,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
-        <div className="min-h-screen flex flex-col">
-          <Nav />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+        <ThemeProvider>
+          <div className="min-h-screen flex flex-col">
+            <Nav />
+            <main className="flex-1 pb-16 md:pb-0">{children}</main>
+            <Footer />
+            <MobileBottomNav />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   )

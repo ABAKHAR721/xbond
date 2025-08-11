@@ -1,12 +1,18 @@
-export const metadata = { title: 'Terms of Service — xBond' }
+'use client'
+import { useTheme } from '@/contexts/theme-context'
 
 export default function TermsPage() {
+  const { theme } = useTheme()
   return (
     <div className="container-px mx-auto max-w-4xl py-20">
       <h1 className="text-3xl md:text-5xl font-semibold tracking-tight">Terms of Service</h1>
-      <p className="mt-4 text-neutral-300">Last updated: 2025-01-01</p>
+      <p className={`mt-4 ${
+        theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
+      }`}>Last updated: 2025-01-01</p>
       
-      <div className="mt-8 space-y-8 text-neutral-200">
+      <div className={`mt-8 space-y-8 ${
+        theme === 'dark' ? 'text-neutral-200' : 'text-neutral-700'
+      }`}>
         <section>
           <h2 className="text-xl font-medium mb-4">Acceptance of Terms</h2>
           <p>By accessing and using xBond&apos;s services, you accept and agree to be bound by the terms and provision of this agreement.</p>
