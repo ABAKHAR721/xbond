@@ -22,12 +22,26 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Here you would typically send the email or save to database
-    // For now, we'll just log it and return success
-    console.log('Contact form submission:', { name, email, company, message })
+    // Send email notification
+    const emailBody = `
+      New contact form submission:
+      
+      Name: ${name}
+      Email: ${email}
+      Company: ${company || 'Not provided'}
+      Message: ${message}
+    `
 
-    // In production, integrate with your email service (SendGrid, Resend, etc.)
-    // await sendEmail({ to: 'hello@xbond.io', subject: 'New Contact Form', body: ... })
+    // TODO: Replace with your email service
+    // Example with Resend:
+    // await resend.emails.send({
+    //   from: 'noreply@xbond.io',
+    //   to: 'hello@xbond.io',
+    //   subject: `New Contact: ${name}`,
+    //   text: emailBody
+    // })
+
+    console.log('Contact form submission:', { name, email, company, message })
 
     return NextResponse.json(
       { message: 'Message sent successfully' },

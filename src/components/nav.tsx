@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useEffect, useState, useCallback } from 'react'
 import { throttle } from '@/lib/utils'
 import { useTheme } from '@/contexts/theme-context'
@@ -29,8 +30,13 @@ export function Nav(){
     <header className={headerClasses}>
       <div className="container-px mx-auto max-w-7xl py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-xl bg-brand" />
-          <span className="font-semibold tracking-tight">xBond</span>
+          <Image 
+            src={theme === 'dark' ? '/6.svg' : '/5.svg'} 
+            alt="xBond Logo" 
+            width={64} 
+            height={64} 
+            className="h-17 w-17"
+          />
         </Link>
         <nav className={`hidden md:flex items-center gap-6 text-sm transition-colors ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'}`}>
           <Link href="/" className={`transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-neutral-900'}`}>Home</Link>

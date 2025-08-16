@@ -73,7 +73,10 @@ export default function HomePage() {
             <div className="aspect-[4/3] w-full rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400">
               <span className="text-sm">Demo screenshot / product shot</span>
             </div>
-            <ul className="mt-6 space-y-2 text-sm text-neutral-300">
+
+            <ul className={`mt-6 space-y-2 text-sm text-neutral-300 ${
+              theme === 'dark' ? 'text-neutral-200' : 'text-neutral-700'
+            }`}>
               <li>• Outreach → Qualification → Handoffs</li>
               <li>• Auto‑enrichment (firmographics & intent)</li>
               <li>• Inbox rotation, warmup, safety checks</li>
