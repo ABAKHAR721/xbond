@@ -22,16 +22,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Send email notification
-    const emailBody = `
-      New contact form submission:
-      
-      Name: ${name}
-      Email: ${email}
-      Company: ${company || 'Not provided'}
-      Message: ${message}
-    `
-
     // TODO: Replace with your email service
     // Example with Resend:
     // await resend.emails.send({

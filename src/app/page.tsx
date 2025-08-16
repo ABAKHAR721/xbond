@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
-import { Check } from 'lucide-react'
+
 import Link from 'next/link'
 import { ProofBar } from '@/components/proof-bar'
 import { CTABanner } from '@/components/cta-banner'
@@ -23,68 +23,142 @@ export default function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className={`relative overflow-hidden border-b transition-colors ${
+      <section className={`relative overflow-hidden border-b transition-colors min-h-[90vh] flex items-center ${
         theme === 'dark' ? 'border-neutral-900' : 'border-neutral-200'
       }`}>
         <div className="absolute inset-0 bg-[radial-gradient(60rem_30rem_at_50%_-20%,rgba(244,116,0,0.18),transparent_60%)]" />
-        <div className="container-px mx-auto max-w-7xl pt-16 pb-20 md:pt-20 md:pb-24">
-          <motion.h1 {...fadeInUp} className="text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight text-center px-4">
-            AI‑Powered Outreach & Lead Systems
-          </motion.h1>
-          <motion.p {...fadeInUp} transition={{...fadeInUp.transition, delay:0.1}} className={`mt-4 md:mt-5 text-base sm:text-lg md:text-xl max-w-3xl mx-auto text-center px-4 ${
-            theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
-          }`}>
-            We design and run cold outreach pipelines, lead nurturing automations, and custom acquisition workflows so qualified clients come to you.
-          </motion.p>
-          <motion.div {...fadeInUp} transition={{...fadeInUp.transition, delay:0.2}} className="mt-6 md:mt-8 flex flex-col sm:flex-row items-center gap-3 justify-center relative z-10 px-4">
-            <Link href="/pricing" className="btn btn-primary w-full sm:w-auto">See pricing</Link>
-            <Link href="/contact" className="btn btn-ghost w-full sm:w-auto">Book a discovery call</Link>
-          </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-br from-brand/5 via-transparent to-brand/10" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-brand/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-400/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="container-px mx-auto max-w-7xl relative z-10">
+          <div className="text-center">
+            <motion.div {...fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand/10 border border-brand/20 mb-6">
+              <span className="text-brand font-semibold text-sm">🚀 Trusted by 500+ Growing Companies</span>
+            </motion.div>
+            
+            <motion.h1 {...fadeInUp} className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight px-4 mb-6">
+              <span className="bg-gradient-to-r from-brand to-orange-600 bg-clip-text text-transparent">
+                AI-Powered
+              </span>
+              <br />
+              <span>Outreach That</span>
+              <br />
+              <span className="bg-gradient-to-r from-brand to-orange-600 bg-clip-text text-transparent">
+                Actually Works
+              </span>
+            </motion.h1>
+            
+            <motion.p {...fadeInUp} transition={{...fadeInUp.transition, delay:0.1}} className={`text-lg md:text-xl max-w-2xl mx-auto px-4 mb-8 ${
+              theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
+            }`}>
+              We build done-for-you outreach systems that generate qualified leads while you focus on closing deals. 
+              <span className="text-brand font-semibold">Average +32% reply rates</span> in under 14 days.
+            </motion.p>
+            
+            <motion.div {...fadeInUp} transition={{...fadeInUp.transition, delay:0.2}} className="flex flex-col sm:flex-row items-center gap-4 justify-center px-4 mb-12">
+              <Link href="/pricing" className="btn btn-primary text-lg px-8 py-4 w-full sm:w-auto shadow-lg hover:shadow-xl transition-all">
+                🎯 See Our Pricing
+              </Link>
+              <Link href="/contact" className="btn btn-ghost text-lg px-8 py-4 w-full sm:w-auto">
+                📞 Book Free Strategy Call
+              </Link>
+            </motion.div>
+            
+            <motion.div {...fadeInUp} transition={{...fadeInUp.transition, delay:0.3}} className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto px-4">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-brand mb-2">500+</div>
+                <div className={`text-sm ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>Companies Served</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-brand mb-2">+32%</div>
+                <div className={`text-sm ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>Avg Reply Rate Increase</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-brand mb-2">&lt;14</div>
+                <div className={`text-sm ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>Days to First Results</div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Services */}
-      <section className="container-px mx-auto max-w-7xl py-12 md:py-20" id="services">
-        <RevealContainer className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
-          <Reveal>
-            <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold tracking-tight">Services that ship pipeline</h2>
-            <p className={`mt-4 max-w-prose ${
+      <section className={`py-20 border-t ${
+        theme === 'dark' ? 'border-neutral-800 bg-gradient-to-b from-neutral-950/50 to-transparent' : 'border-neutral-200 bg-gradient-to-b from-neutral-50 to-transparent'
+      }`} id="services">
+        <div className="container-px mx-auto max-w-7xl">
+          <div className="text-center mb-16">
+            <motion.h2 {...fadeInUp} className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+              Services That <span className="bg-gradient-to-r from-brand to-orange-600 bg-clip-text text-transparent">Ship Pipeline</span>
+            </motion.h2>
+            <motion.p {...fadeInUp} transition={{...fadeInUp.transition, delay:0.1}} className={`text-lg max-w-2xl mx-auto ${
               theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
-            }`}>Done‑for‑you strategy, build, and implementation tailored to your goals. Start small, scale what works.</p>
-            <ul className={`mt-6 space-y-3 text-sm ${
-              theme === 'dark' ? 'text-neutral-200' : 'text-neutral-700'
             }`}>
-              {[
-                'AI‑assisted cold outreach systems (multichannel email/LinkedIn)',
-                'Lead nurturing automations and CRM enrichment',
-                'Acquisition workflows with human‑in‑the‑loop approvals',
-                'Analytics & reporting for measurable ROI',
-              ].map((item)=> (
-                <li key={item} className="flex items-start gap-2"><Check className="h-5 w-5 text-brand mt-0.5"/><span>{item}</span></li>
-              ))}
-            </ul>
-            <div className="mt-6 flex gap-3">
-              <Link href="/services" className="btn btn-brand">Explore services</Link>
-              <Link href="/contact" className="btn btn-ghost">Talk to an expert</Link>
-            </div>
-          </Reveal>
-          <Reveal>
-          <div className="relative card p-6">
-            <div className="aspect-[4/3] w-full rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400">
-              <span className="text-sm">Demo screenshot / product shot</span>
-            </div>
-
-            <ul className={`mt-6 space-y-2 text-sm text-neutral-300 ${
-              theme === 'dark' ? 'text-neutral-200' : 'text-neutral-700'
-            }`}>
-              <li>• Outreach → Qualification → Handoffs</li>
-              <li>• Auto‑enrichment (firmographics & intent)</li>
-              <li>• Inbox rotation, warmup, safety checks</li>
-              <li>• Weekly optimization reviews</li>
-            </ul>
+              Done-for-you strategy, build, and implementation tailored to your goals. Start small, scale what works.
+            </motion.p>
           </div>
-          </Reveal>
-        </RevealContainer>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-12 lg:mb-16">
+            <Reveal>
+              <div className="space-y-6 lg:space-y-8">
+                {[
+                  { title: 'AI-Assisted Cold Outreach', desc: 'Multichannel email/LinkedIn systems with smart personalization', color: 'from-blue-500 to-cyan-500' },
+                  { title: 'Lead Nurturing Automations', desc: 'CRM enrichment and intelligent follow-up sequences', color: 'from-green-500 to-emerald-500' },
+                  { title: 'Acquisition Workflows', desc: 'Human-in-the-loop approvals with automated handoffs', color: 'from-purple-500 to-violet-500' },
+                  { title: 'Analytics & Reporting', desc: 'Real-time dashboards for measurable ROI tracking', color: 'from-orange-500 to-red-500' }
+                ].map((service, idx) => (
+                  <div key={idx} className="group flex items-start gap-3 lg:gap-4 p-3 lg:p-4 rounded-xl lg:rounded-2xl hover:bg-brand/5 transition-all cursor-pointer">
+                    <div className={`w-10 h-10 lg:w-12 lg:h-12 rounded-lg lg:rounded-xl bg-gradient-to-r ${service.color} flex items-center justify-center lg:group-hover:scale-110 transition-transform`}>
+                      <div className="w-2.5 h-2.5 lg:w-3 lg:h-3 bg-white rounded-full"></div>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-base lg:text-lg mb-1 lg:mb-2 lg:group-hover:text-brand transition-colors">{service.title}</h3>
+                      <p className={`text-sm lg:text-base ${
+                        theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'
+                      }`}>{service.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+            
+            <Reveal>
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-brand/20 to-orange-500/20 rounded-3xl blur-3xl"></div>
+                <div className="relative card p-8 bg-gradient-to-br from-brand/10 to-orange-500/5">
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Outreach?</h3>
+                    <p className={`mb-6 ${
+                      theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
+                    }`}>
+                      See how our AI-powered systems can 3x your reply rates in just 14 days.
+                    </p>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div className="text-center p-4 rounded-xl bg-brand/10">
+                      <div className="text-2xl font-bold text-brand">3x</div>
+                      <div className="text-xs text-neutral-500">Reply Rates</div>
+                    </div>
+                    <div className="text-center p-4 rounded-xl bg-brand/10">
+                      <div className="text-2xl font-bold text-brand">14</div>
+                      <div className="text-xs text-neutral-500">Days Setup</div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <Link href="/services" className="btn btn-brand w-full">
+                      Explore All Services
+                    </Link>
+                    <Link href="/contact" className="btn btn-ghost w-full">
+                      Talk to an Expert
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
       </section>
 
       {/* Logos */}
@@ -111,6 +185,40 @@ export default function HomePage() {
 
       <ProofBar />
 
+      {/* How It Works */}
+      <section className="container-px mx-auto max-w-7xl py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+            How We <span className="text-brand">Transform</span> Your Outreach
+          </h2>
+          <p className={`text-lg max-w-2xl mx-auto ${
+            theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
+          }`}>
+            Our proven 4-step process that turns cold prospects into qualified leads
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-4 gap-8">
+          {[
+            { step: '01', title: 'Strategy & Setup', desc: 'We analyze your ICP and build custom outreach sequences', icon: '🎯' },
+            { step: '02', title: 'AI Implementation', desc: 'Deploy smart automation with safety guardrails', icon: '🤖' },
+            { step: '03', title: 'Launch & Monitor', desc: 'Go live with real-time performance tracking', icon: '🚀' },
+            { step: '04', title: 'Optimize & Scale', desc: 'Continuous improvement for maximum ROI', icon: '📈' }
+          ].map((item, idx) => (
+            <Reveal key={idx}>
+              <div className="text-center group">
+                <div className="text-6xl mb-4 group-hover:scale-110 transition-transform">{item.icon}</div>
+                <div className="text-brand font-bold text-sm mb-2">STEP {item.step}</div>
+                <h3 className="font-bold text-lg mb-3">{item.title}</h3>
+                <p className={`text-sm ${
+                  theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'
+                }`}>{item.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* Pricing section */}
       <section className="container-px mx-auto max-w-7xl py-12 md:py-20" id="pricing">
         <div className="flex items-end justify-between flex-wrap gap-4">
@@ -132,13 +240,155 @@ export default function HomePage() {
         />
       </section>
 
-      {/* Services cards (full section from Services page) */}
+      {/* Results Showcase */}
+      <section className={`py-20 border-t ${
+        theme === 'dark' ? 'border-neutral-800 bg-neutral-950/50' : 'border-neutral-200 bg-neutral-50'
+      }`}>
+        <div className="container-px mx-auto max-w-7xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+              Real Results from Real Clients
+            </h2>
+            <p className={`text-lg max-w-2xl mx-auto ${
+              theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
+            }`}>
+              See how we have transformed outreach for companies just like yours
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { metric: '+284%', label: 'Reply Rate Increase', company: 'SaaS Startup', industry: 'B2B Software' },
+              { metric: '47%', label: 'Meeting Book Rate', company: 'Marketing Agency', industry: 'Digital Marketing' },
+              { metric: '$2.3M', label: 'Pipeline Generated', company: 'Consulting Firm', industry: 'Business Consulting' }
+            ].map((result, idx) => (
+              <Reveal key={idx}>
+                <div className="card p-8 text-center hover:scale-105 transition-all">
+                  <div className="text-4xl font-bold text-brand mb-4">{result.metric}</div>
+                  <div className="font-semibold text-lg mb-2">{result.label}</div>
+                  <div className={`text-sm ${
+                    theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'
+                  }`}>
+                    {result.company} • {result.industry}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services cards */}
       <section className="container-px mx-auto max-w-7xl py-12 md:py-20" id="services-cards">
         <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold tracking-tight">Services</h2>
         <p className={`mt-4 max-w-prose ${
-          theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
+          theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600 neutral-600'
         }`}>We help startups and service businesses get more clients through AI‑powered outreach and lead systems. Choose what you need, or bundle into a pilot.</p>
         <ServiceCards />
+      </section>
+
+      {/* Testimonials */}
+      <section className="container-px mx-auto max-w-7xl py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+            What Our Clients Say
+          </h2>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          {[
+            {
+              quote: "xBond transformed our outreach completely. We went from 8% to 35% reply rates in just 3 weeks. The ROI is incredible.",
+              name: "Sarah Chen",
+              title: "VP of Sales",
+              company: "TechFlow Solutions"
+            },
+            {
+              quote: "Finally, outreach that actually works. Their AI system books more qualified meetings than our entire sales team used to.",
+              name: "Marcus Rodriguez",
+              title: "Founder",
+              company: "GrowthLab Agency"
+            }
+          ].map((testimonial, idx) => (
+            <Reveal key={idx}>
+              <div className="card p-8">
+                <div className="text-4xl text-brand mb-4">“</div>
+                <p className={`text-lg mb-6 italic ${
+                  theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
+                }`}>
+                  {testimonial.quote}
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center font-bold text-brand">
+                    {testimonial.name.split(' ').map(n => n[0]).join('')}
+                  </div>
+                  <div>
+                    <div className="font-semibold">{testimonial.name}</div>
+                    <div className={`text-sm ${
+                      theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'
+                    }`}>
+                      {testimonial.title} at {testimonial.company}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Why Choose xBond */}
+      <section className={`py-20 border-t ${
+        theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'
+      }`}>
+        <div className="container-px mx-auto max-w-7xl">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <Reveal>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+                  Why Choose <span className="text-brand">xBond</span>?
+                </h2>
+                <div className="space-y-6">
+                  {[
+                    { icon: '⚡', title: 'Lightning Fast Setup', desc: 'Get your first campaign running in under 48 hours' },
+                    { icon: '🎯', title: 'Laser-Focused Targeting', desc: 'AI-powered prospect identification and personalization' },
+                    { icon: '📈', title: 'Real-Time Analytics', desc: 'Track every metric that matters with live dashboards' },
+                    { icon: '🛡️', title: 'Compliance & Safety', desc: 'Built-in safeguards to protect your domain reputation' }
+                  ].map((feature, idx) => (
+                    <div key={idx} className="flex items-start gap-4">
+                      <div className="text-2xl">{feature.icon}</div>
+                      <div>
+                        <h3 className="font-semibold mb-1">{feature.title}</h3>
+                        <p className={`text-sm ${
+                          theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'
+                        }`}>{feature.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+            
+            <Reveal>
+              <div className="relative">
+                <div className="card p-8 bg-gradient-to-br from-brand/10 to-orange-500/10">
+                  <div className="text-center">
+                    <div className="text-6xl mb-4">🚀</div>
+                    <h3 className="text-2xl font-bold mb-4">Ready to 10x Your Outreach?</h3>
+                    <p className={`mb-6 ${
+                      theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
+                    }`}>
+                      Join 500+ companies already using xBond to generate qualified leads on autopilot.
+                    </p>
+                    <Link href="/contact" className="btn btn-primary w-full">
+                      Start Your Free Strategy Session
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
       </section>
 
       {/* Case studies preview */}
