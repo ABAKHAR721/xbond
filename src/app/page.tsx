@@ -33,7 +33,7 @@ export default function HomePage() {
         <div className="container-px mx-auto max-w-7xl relative z-10">
           <div className="text-center">
             <motion.div {...fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand/10 border border-brand/20 mb-6">
-              <span className="text-brand font-semibold text-sm">🚀 Trusted by 500+ Growing Companies</span>
+              <span className="text-brand font-semibold text-sm">🚀 Trusted by 50+ Growing Companies</span>
             </motion.div>
             
             <motion.h1 {...fadeInUp} className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight px-4 mb-6">
@@ -41,7 +41,7 @@ export default function HomePage() {
                 AI-Powered
               </span>
               <br />
-              <span>Outreach That</span>
+              <span>Client Acquisition That</span>
               <br />
               <span className="bg-gradient-to-r from-brand to-orange-600 bg-clip-text text-transparent">
                 Actually Works
@@ -51,8 +51,8 @@ export default function HomePage() {
             <motion.p {...fadeInUp} transition={{...fadeInUp.transition, delay:0.1}} className={`text-lg md:text-xl max-w-2xl mx-auto px-4 mb-8 ${
               theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
             }`}>
-              We build done-for-you outreach systems that generate qualified leads while you focus on closing deals. 
-              <span className="text-brand font-semibold">Average +32% reply rates</span> in under 14 days.
+              We build done-for-you client acquisition systems that generate qualified leads while you focus on closing deals.
+              <span className="text-brand font-semibold">  Average +32% reply rates</span> in under 14 days.
             </motion.p>
             
             <motion.div {...fadeInUp} transition={{...fadeInUp.transition, delay:0.2}} className="flex flex-col sm:flex-row items-center gap-4 justify-center px-4 mb-12">
@@ -66,7 +66,7 @@ export default function HomePage() {
             
             <motion.div {...fadeInUp} transition={{...fadeInUp.transition, delay:0.3}} className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto px-4">
               <div className="text-center">
-                <div className="text-3xl font-bold text-brand mb-2">500+</div>
+                <div className="text-3xl font-bold text-brand mb-2">50+</div>
                 <div className={`text-sm ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>Companies Served</div>
               </div>
               <div className="text-center">
@@ -89,7 +89,7 @@ export default function HomePage() {
         <div className="container-px mx-auto max-w-7xl">
           <div className="text-center mb-16">
             <motion.h2 {...fadeInUp} className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
-              Services That <span className="bg-gradient-to-r from-brand to-orange-600 bg-clip-text text-transparent">Ship Pipeline</span>
+              Systems That <span className="bg-gradient-to-r from-brand to-orange-600 bg-clip-text text-transparent">Ship Pipeline</span>
             </motion.h2>
             <motion.p {...fadeInUp} transition={{...fadeInUp.transition, delay:0.1}} className={`text-lg max-w-2xl mx-auto ${
               theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'

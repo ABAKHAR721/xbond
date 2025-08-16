@@ -35,7 +35,7 @@ export function Nav(){
             alt="xBond Logo" 
             width={64} 
             height={64} 
-            className="h-17 w-17"
+            className="h-20 w-20"
           />
         </Link>
         <nav className={`hidden md:flex items-center gap-6 text-sm transition-colors ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'}`}>
