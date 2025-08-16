@@ -52,7 +52,7 @@ export function Pricing(){
 
   return (
     <div>
-      <div className="flex items-center justify-center gap-4 mb-8">
+      <div className="flex items-center justify-end gap-4 mb-8">
         <div className="flex items-center gap-3 p-1 rounded-2xl border transition-colors" style={{
           borderColor: theme === 'dark' ? '#262626' : '#e5e5e5',
           backgroundColor: theme === 'dark' ? 'rgba(23, 23, 23, 0.4)' : 'rgba(255, 255, 255, 0.8)'
@@ -86,7 +86,7 @@ export function Pricing(){
       <RevealContainer className="grid md:grid-cols-3 gap-8 items-stretch">
         {tiers.map((t)=> (
           <Reveal key={t.name}>
-          <div className={`relative card p-8 h-full flex flex-col transition-all duration-300 hover:scale-105 ${
+          <div className={`relative card p-8 h-full flex flex-col transition-all duration-300 hover:scale-[1.02] ${
             t.popular 
               ? 'border-brand/60 shadow-soft' + (theme === 'dark' ? ' bg-brand/5' : ' bg-brand/10') 
               : ''
@@ -153,9 +153,14 @@ export function Pricing(){
                   Get Started
                 </button>
               )}
-              {t.name !== 'Bespoke' && (
+              {t.name === 'Basic' && (
                 <p className={`mt-3 text-xs text-center ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-600'}`}>
-                  + One-time setup from $290
+                  + One-time setup starting from $290
+                </p>
+              )}
+              {t.name === 'Growth' && (
+                <p className={`mt-3 text-xs text-center ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-600'}`}>
+                  + One-time setup starting from $590
                 </p>
               )}
             </div>

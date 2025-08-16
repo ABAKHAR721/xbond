@@ -2,10 +2,11 @@
 import Link from 'next/link'
 import { Reveal } from './reveal'
 import { useTheme } from '@/contexts/theme-context'
+import { ReactNode } from 'react'
 
 type Props = {
   title: string
-  subtitle?: string
+  subtitle?: string | ReactNode
   primary?: { href: string; label: string }
   secondary?: { href: string; label: string }
 }

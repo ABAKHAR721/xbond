@@ -21,7 +21,7 @@ type PlanDetails = {
 const DETAILS: Record<PlanName, PlanDetails> = {
   Basic: {
     name: 'Basic',
-    headline: 'Foundations to start generating pipeline fast',
+    headline: 'Foundations to optimize clients acquisition fast',
     price: '$99/mo + setup',
     summary:
       'Perfect for small teams getting their first predictable outreach system in place. We set up an AI‑assisted flow that reliably books first conversations.',
@@ -44,7 +44,7 @@ const DETAILS: Record<PlanName, PlanDetails> = {
   },
   Growth: {
     name: 'Growth',
-    headline: 'Scale what works with advanced automation',
+    headline: 'Scale what works with advanced automation Systems',
     price: '$299/mo + setup',
     summary:
       'For teams ready to scale outreach and qualification. We add multichannel, deeper enrichment, analytics, and a faster feedback loop for iteration.',

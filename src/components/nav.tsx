@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useEffect, useState, useCallback } from 'react'
 import { throttle } from '@/lib/utils'
 import { useTheme } from '@/contexts/theme-context'
-import { Home, Briefcase, DollarSign, Mail } from 'lucide-react'
+import { Home, Briefcase, DollarSign, Mail, Sun, Moon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 
 export function Nav(){
@@ -52,7 +52,7 @@ export function Nav(){
             className={`p-2 rounded-lg transition-colors ${theme === 'dark' ? 'hover:bg-neutral-800' : 'hover:bg-neutral-100'}`}
             aria-label="Toggle theme"
           >
-            {theme === 'dark' ? '☀️' : '🌙'}
+            {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </button>
           <Link href="https://calendly.com/xbond" className="btn btn-primary">Get started</Link>
         </div>
@@ -76,14 +76,14 @@ export function MobileBottomNav() {
     <nav className={`md:hidden fixed bottom-0 left-0 right-0 z-50 border-t ${
       theme === 'dark' ? 'bg-neutral-950/95 border-neutral-800' : 'bg-white/95 border-neutral-200'
     } backdrop-blur-sm`}>
-      <div className="flex items-center justify-around py-2">
+      <div className="flex items-center justify-around py-1 ">
         {navItems.map(({ href, icon: Icon, label }) => {
           const isActive = pathname === href
           return (
             <Link
               key={href}
               href={href}
-              className={`flex flex-col items-center gap-1 p-2 rounded-lg transition-colors ${
+              className={`flex flex-col items-center gap-0.5 p-1.5 rounded-lg transition-colors ${
                 isActive
                   ? 'text-brand'
                   : theme === 'dark'

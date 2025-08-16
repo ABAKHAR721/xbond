@@ -3,6 +3,7 @@ import './globals.css'
 import { Nav, MobileBottomNav } from '@/components/nav'
 import { Footer } from '@/components/footer'
 import { ThemeProvider } from '@/contexts/theme-context'
+import { DynamicFavicon } from '@/components/dynamic-favicon'
 
 // app/layout.tsx
 import { Inter } from 'next/font/google'
@@ -33,8 +34,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={inter.variable}>
+      <head></head>
       <body className="font-sans antialiased">
         <ThemeProvider>
+          <DynamicFavicon />
           <div className="min-h-screen flex flex-col">
             <Nav />
             <main className="flex-1 pb-16 md:pb-0">{children}</main>

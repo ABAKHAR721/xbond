@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
-
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { ProofBar } from '@/components/proof-bar'
 import { CTABanner } from '@/components/cta-banner'
@@ -20,10 +20,29 @@ const fadeInUp = {
 export default function HomePage() {
   const { theme } = useTheme()
   
+  useEffect(() => {
+    const nav = document.querySelector('header')
+    if (!nav) return
+    
+    const handleScroll = () => {
+      const heroHeight = window.innerHeight * 0.9
+      const shouldShow = window.scrollY > heroHeight
+      nav.style.display = shouldShow ? 'block' : 'none'
+    }
+    
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      nav.style.display = 'block' // Reset when leaving page
+    }
+  }, [])
+  
   return (
     <div>
       {/* Hero */}
-      <section className={`relative overflow-hidden border-b transition-colors min-h-[90vh] flex items-center ${
+      <section className={`relative overflow-hidden border-b transition-colors min-h-screen flex items-center ${
         theme === 'dark' ? 'border-neutral-900' : 'border-neutral-200'
       }`}>
         <div className="absolute inset-0 bg-[radial-gradient(60rem_30rem_at_50%_-20%,rgba(244,116,0,0.18),transparent_60%)]" />
@@ -233,8 +252,14 @@ export default function HomePage() {
       {/* CTA */}
       <section className="container-px mx-auto max-w-7xl pb-24">
         <CTABanner
-          title="Ready to make pipeline predictable?"
-          subtitle="Book a 15‑minute discovery. We’ll map one high‑impact workflow and outline a pilot you can ship in days."
+          title="Ready to make clients acquisition predictable?"
+          subtitle={
+        <>
+          Book a 15‑minute discovery. We’ll map one high‑impact workflow and outline an{' '}
+          <span className="text-orange-500 font-semibold">Automation / AI Agent</span>
+          {' '}you can ship in days.
+        </>
+          }
           primary={{ href: 'https://calendly.com/xbond', label: 'Book a call' }}
           secondary={{ href: '/services', label: 'See services' }}
         />
@@ -283,7 +308,7 @@ export default function HomePage() {
         <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold tracking-tight">Services</h2>
         <p className={`mt-4 max-w-prose ${
           theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600 neutral-600'
-        }`}>We help startups and service businesses get more clients through AI‑powered outreach and lead systems. Choose what you need, or bundle into a pilot.</p>
+        }`}>We help startups and service businesses get more clients through AI‑powered client acquisition systems. Choose what you need, or bundle into a pilot.</p>
         <ServiceCards />
       </section>
 

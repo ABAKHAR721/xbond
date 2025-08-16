@@ -7,7 +7,7 @@ const services = [
   {
     icon: Sparkles,
     title: 'AI Chatbots & Assistants',
-    desc: 'Handle customer inquiries, intake, and routing with measurable SLAs.',
+    desc: 'Handle customer inquiries, inbound & outbound calls with KPIs and call logs.',
     bullets: ['Website chat & lead capture','Knowledge‑base grounding','Escalations to human']
   },
   {
