@@ -96,14 +96,15 @@ export function ContactInline() {
         </Reveal>
 
         <Reveal>
-        <div className="card p-8 text-center">
-          <h3 className="text-xl font-semibold mb-4">Schedule a Call</h3>
-          <p className={`mb-6 ${
-            theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'
-          }`}>Book a 15-minute discovery call to discuss your outreach goals.</p>
-          <Link href="https://calendly.com/xbond" target="_blank" className="btn btn-brand">
-            Open Calendar
-          </Link>
+        <div className="card p-4">
+          <h3 className="text-xl font-semibold mb-4 text-center">Schedule a Call</h3>
+          <iframe 
+            src="https://cal.com/xbond/15min" 
+            width="100%" 
+            height="600" 
+            frameBorder="0"
+            className="rounded-lg"
+          />
         </div>
         </Reveal>
       </RevealContainer>
